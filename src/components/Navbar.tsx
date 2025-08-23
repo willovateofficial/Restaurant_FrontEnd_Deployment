@@ -273,6 +273,15 @@ const Navbar: React.FC<NavbarProps> = ({ onSidebarToggle }) => {
   }, [isAuthenticated, role, location.pathname, isCustomerPage]);
 
   useEffect(() => {
+    console.log(
+      "DEBUG => role:",
+      role,
+      "plan_status:",
+      localStorage.getItem("plan_status")
+    );
+  }, [role]);
+
+  useEffect(() => {
     const handleOpenCustomerLogin = () => {
       // Show modal logic here
       console.log("Open customer login modal");
