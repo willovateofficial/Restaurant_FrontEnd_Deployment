@@ -42,6 +42,7 @@ const PopularCategories = () => {
       role !== "owner" &&
       role !== "manager" &&
       role !== "staff" &&
+      role !== "chief" &&
       !customerToken
     ) {
       setShowLogin(true);
