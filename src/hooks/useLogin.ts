@@ -7,7 +7,7 @@ export const useLogin = () => {
     onSuccess: (data) => {
       // Save token on success
       localStorage.setItem("token", data.token);
-      localStorage.setItem("role", data.user.role);
+      localStorage.setItem("role", data.user.role.trim().toLowerCase());
       localStorage.setItem("plan_status", data.plan_status);
       localStorage.setItem("buisiness_name", data.user.business.name);
       localStorage.setItem("businessId", data.user.business.id);
