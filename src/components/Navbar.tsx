@@ -168,7 +168,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSidebarToggle }) => {
       isAuthenticated &&
       role != null &&
       planStatus === "active" &&
-      ["owner", "manager", "staff", "cheif"].includes(role.toLowerCase()) &&
+      ["owner", "manager", "staff", "chief"].includes(role.toLowerCase()) &&
       !isCustomerPage &&
       !excludedPaths.includes(currentPath)
     );
