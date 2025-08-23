@@ -1,6 +1,6 @@
 export function useAuth() {
   const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role")?.trim().toLowerCase();
+  const role = localStorage.getItem("role")?.toLowerCase();
   const plan = localStorage.getItem("plan") || "free trial"; // 👈 Add this
 
   return {
