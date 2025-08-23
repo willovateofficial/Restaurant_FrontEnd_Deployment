@@ -115,10 +115,7 @@ const restaurantNav: NavItem[] = [
   { name: "Track Order", path: "/track-order" },
 ];
 
-const chiefNav: NavItem[] = [
-  { name: "Orders", path: "/order-list" },
-  { name: "Order Details", path: "/order-details" },
-];
+const chiefNav: NavItem[] = [{ name: "Orders", path: "/order-list" }];
 
 const superadminNav: NavItem[] = [{ name: "AdminInterface", path: "/admin" }];
 
