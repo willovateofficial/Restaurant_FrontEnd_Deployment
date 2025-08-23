@@ -255,10 +255,10 @@ const Navbar: React.FC<NavbarProps> = ({ onSidebarToggle }) => {
         } else if (normalizedRole === "staff") {
           setNavItems([]);
           setSideStripItems(staffNav);
-        } else if (normalizedRole === "chief") {
-          setNavItems([]);
-          setSideStripItems(chiefNav);
         }
+      } else if (normalizedRole === "chief") {
+        setNavItems([]);
+        setSideStripItems(chiefNav);
       } else {
         setNavItems(publicHomeNav);
         setSideStripItems([]);
