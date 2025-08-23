@@ -220,7 +220,7 @@ function App() {
             path="/order-list"
             element={
               <ProtectedRoute
-                allowedRoles={["staff", "owner", "manager", "admin"]}
+                allowedRoles={["staff", "owner", "manager", "admin", "chief"]}
               >
                 <OrderList />
               </ProtectedRoute>
@@ -231,7 +231,7 @@ function App() {
             path="/order-details/:orderId"
             element={
               <ProtectedRoute
-                allowedRoles={["staff", "owner", "manager", "admin"]}
+                allowedRoles={["staff", "owner", "manager", "admin", "chief"]}
               >
                 <OrderDetails />
               </ProtectedRoute>

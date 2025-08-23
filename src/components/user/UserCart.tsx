@@ -78,6 +78,7 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || `${baseURL}/api`;
 
 const role = localStorage.getItem("role");
 const isPrivilegedUser = ["owner", "staff", "manager"].includes(role || "");
+const isChief = role === "chief";
 
 const UserCart: React.FC<UserCartProps> = ({
   items,
@@ -896,14 +897,16 @@ const UserCart: React.FC<UserCartProps> = ({
               );
             })}
 
-            <div className="text-center mb-4">
-              <button
-                onClick={handleAddNewItem}
-                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
-              >
-                + Add New Item
-              </button>
-            </div>
+            {!isChief && (
+              <div className="text-center mb-4">
+                <button
+                  onClick={handleAddNewItem}
+                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+                >
+                  + Add New Item
+                </button>
+              </div>
+            )}
 
             {isLoggedIn && availablePoints > 0 && (
               <div className="mb-4">
@@ -943,31 +946,33 @@ const UserCart: React.FC<UserCartProps> = ({
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Apply Coupon
-              </label>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={couponCode}
-                  onChange={(e) => setCouponCode(e.target.value)}
-                  placeholder="Enter coupon code"
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg"
-                />
-                <button
-                  onClick={handleApplyCoupon}
-                  className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-                >
-                  Apply
-                </button>
-              </div>
-              {appliedCoupon && (
-                <div className="text-green-600 text-sm mt-1">
-                  ✅ Applied: {appliedCoupon.code} (−₹{discountAmount})
+            {!isChief && (
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Apply Coupon
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={couponCode}
+                    onChange={(e) => setCouponCode(e.target.value)}
+                    placeholder="Enter coupon code"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg"
+                  />
+                  <button
+                    onClick={handleApplyCoupon}
+                    className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                  >
+                    Apply
+                  </button>
                 </div>
-              )}
-            </div>
+                {appliedCoupon && (
+                  <div className="text-green-600 text-sm mt-1">
+                    ✅ Applied: {appliedCoupon.code} (−₹{discountAmount})
+                  </div>
+                )}
+              </div>
+            )}
 
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -1046,23 +1051,25 @@ const UserCart: React.FC<UserCartProps> = ({
               </button>
             )}
 
-            <button
-              onClick={handleOrderSubmit}
-              disabled={loading || cartItems.length === 0}
-              className={`bg-[#FF6B00] hover:bg-orange-700 text-white font-bold rounded-xl w-full py-3 shadow-md transition ${
-                loading || cartItems.length === 0
-                  ? "opacity-50 cursor-not-allowed"
-                  : ""
-              }`}
-            >
-              {loading
-                ? isEditMode
-                  ? "Saving..."
-                  : "Placing Order..."
-                : isEditMode
-                ? "Save Changes"
-                : "Secure Payment"}
-            </button>
+            {!isChief && (
+              <button
+                onClick={handleOrderSubmit}
+                disabled={loading || cartItems.length === 0}
+                className={`bg-[#FF6B00] hover:bg-orange-700 text-white font-bold rounded-xl w-full py-3 shadow-md transition ${
+                  loading || cartItems.length === 0
+                    ? "opacity-50 cursor-not-allowed"
+                    : ""
+                }`}
+              >
+                {loading
+                  ? isEditMode
+                    ? "Saving..."
+                    : "Placing Order..."
+                  : isEditMode
+                  ? "Save Changes"
+                  : "Secure Payment"}
+              </button>
+            )}
           </div>
         </div>
       </div>

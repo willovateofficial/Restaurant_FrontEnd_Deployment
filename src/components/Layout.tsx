@@ -36,7 +36,7 @@ const Layout: React.FC = () => {
 
   const shouldShowSidebar =
     isAuthenticated &&
-    ["owner", "manager", "staff"].includes(normalizedRole) &&
+    ["owner", "manager", "staff", "chief"].includes(normalizedRole) &&
     planStatus === "active" &&
     !isCustomerPage &&
     !location.pathname.startsWith("/main");
