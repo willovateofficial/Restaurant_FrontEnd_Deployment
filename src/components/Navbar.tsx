@@ -282,7 +282,8 @@ const Navbar: React.FC<NavbarProps> = ({ onSidebarToggle }) => {
       "plan_status:",
       localStorage.getItem("plan_status")
     );
-  }, [role]);
+    console.log("Sidestrip items for sidebar:", sidestripItems);
+  }, [role, sidestripItems]);
 
   useEffect(() => {
     const handleOpenCustomerLogin = () => {
