@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Add navigate
 import { baseUrl } from "../config";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,6 +22,7 @@ type InventoryItem = {
 };
 
 const InventoryPage = () => {
+  const navigate = useNavigate(); // Add for redirect
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [newItem, setNewItem] = useState({
@@ -37,29 +39,61 @@ const InventoryPage = () => {
     threshold: "",
   });
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null); // Add error state
 
-  const fetchInventory = async () => {
+  const role = localStorage.getItem("role")?.toLowerCase(); // Normalize case
+  const isPrivilegedUser = ["owner", "staff", "manager", "chief"].includes(
+    role || ""
+  );
+
+  const fetchInventory = useCallback(async () => {
+    if (!isPrivilegedUser) {
+      toast.error("Access denied for your role");
+      navigate("/access-denied");
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("No authentication token found. Please log in again.");
+      toast.error("Please log in again");
+      navigate("/login");
+      return;
+    }
+
     setIsLoading(true);
     try {
-      const token = localStorage.getItem("token");
       const res = await axios.get(`${baseUrl}/api/inventory`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      console.log("Inventory data:", res.data); // Debug
       setInventory(res.data);
-    } catch (error) {
-      toast.error("Failed to fetch inventory");
-      console.error("Fetch error:", error);
+      setError(null);
+    } catch (error: any) {
+      const message =
+        error.response?.status === 403
+          ? "Access denied: Insufficient permissions"
+          : error.response?.status === 401
+          ? "Unauthorized: Invalid or expired token"
+          : "Failed to fetch inventory";
+      setError(message);
+      toast.error(message);
+      console.error("Fetch error:", error.response || error);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [isPrivilegedUser, navigate]);
 
   useEffect(() => {
     fetchInventory();
-  }, []);
+  }, [fetchInventory]);
 
   const handleAddStock = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isPrivilegedUser) {
+      toast.error("Access denied for your role");
+      return;
+    }
     setIsLoading(true);
     const token = localStorage.getItem("token");
 
@@ -78,9 +112,9 @@ const InventoryPage = () => {
       setShowForm(false);
       fetchInventory();
       toast.success("Item added successfully");
-    } catch (err) {
-      toast.error("Failed to add item");
-      console.error("Add error:", err);
+    } catch (err: any) {
+      toast.error(err.response?.data?.error || "Failed to add item");
+      console.error("Add error:", err.response || err);
     } finally {
       setIsLoading(false);
     }
@@ -88,6 +122,10 @@ const InventoryPage = () => {
 
   const handleEditSubmit = async (e: React.FormEvent, id: number) => {
     e.preventDefault();
+    if (!isPrivilegedUser) {
+      toast.error("Access denied for your role");
+      return;
+    }
     setIsLoading(true);
     const token = localStorage.getItem("token");
 
@@ -106,15 +144,19 @@ const InventoryPage = () => {
       setEditingId(null);
       fetchInventory();
       toast.success("Item updated successfully");
-    } catch (err) {
-      toast.error("Failed to update item");
-      console.error("Update error:", err);
+    } catch (err: any) {
+      toast.error(err.response?.data?.error || "Failed to update item");
+      console.error("Update error:", err.response || err);
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleDeleteItem = async (id: number) => {
+    if (!isPrivilegedUser) {
+      toast.error("Access denied for your role");
+      return;
+    }
     setIsLoading(true);
     const token = localStorage.getItem("token");
 
@@ -124,9 +166,9 @@ const InventoryPage = () => {
       });
       fetchInventory();
       toast.success("Item deleted successfully");
-    } catch (err) {
-      toast.error("Failed to delete item");
-      console.error("Delete error:", err);
+    } catch (err: any) {
+      toast.error(err.response?.data?.error || "Failed to delete item");
+      console.error("Delete error:", err.response || err);
     } finally {
       setIsLoading(false);
     }
@@ -149,6 +191,8 @@ const InventoryPage = () => {
     if (qty < threshold) return "⚠️";
     return "✅";
   };
+
+  if (error) return <div className="text-center text-red-600">{error}</div>;
 
   return (
     <div className="min-h-screen bg-white py-4 px-2 sm:py-6 sm:px-4 lg:px-8 -mt-4 mb-10">
@@ -583,7 +627,7 @@ const InventoryPage = () => {
                         </div>
                         <div className="flex items-center justify-between">
                           <span
-                            className={`px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(
+                            className={`px-2 py-0.5 text-xs font-semibold rounded-full border ${getStatusColor(
                               parseFloat(editItem.quantity),
                               parseFloat(editItem.threshold)
                             )}`}
