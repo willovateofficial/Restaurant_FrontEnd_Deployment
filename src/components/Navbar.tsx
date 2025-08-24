@@ -286,6 +286,11 @@ const Navbar: React.FC<NavbarProps> = ({ onSidebarToggle }) => {
   }, [role, sidestripItems]);
 
   useEffect(() => {
+    console.log("Role in Navbar useEffect:", role);
+    console.log("Sidestrip items:", sidestripItems);
+  }, [role, sidestripItems]);
+
+  useEffect(() => {
     const handleOpenCustomerLogin = () => {
       // Show modal logic here
       console.log("Open customer login modal");
