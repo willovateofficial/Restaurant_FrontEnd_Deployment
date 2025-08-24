@@ -102,6 +102,11 @@ const staffNav: NavItem[] = [
   { name: "Take Orders", path: "/restaurant" },
 ];
 
+const chiefNav: NavItem[] = [
+  { name: "Orders", path: "/order-list" },
+  { name: "Inventory Management", path: "/inventory" },
+];
+
 const publicHomeNav: NavItem[] = [
   { name: "Home", path: "/" },
   { name: "Plans", path: "/plan-section" },
@@ -114,8 +119,6 @@ const restaurantNav: NavItem[] = [
   { name: "Menu", path: "/restaurant" },
   { name: "Track Order", path: "/track-order" },
 ];
-
-const chiefNav: NavItem[] = [{ name: "Orders", path: "/order-list" }];
 
 const superadminNav: NavItem[] = [{ name: "AdminInterface", path: "/admin" }];
 
