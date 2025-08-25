@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 import axios, { AxiosError } from "axios";
 import cartImg from "../../assets/CartImg.jpg";
@@ -76,11 +76,6 @@ function markTableBooked(tableNumber: number) {
 const baseURL = baseUrl;
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || `${baseURL}/api`;
 
-const role = localStorage.getItem("role");
-const isPrivilegedUser = ["owner", "staff", "manager", "chief"].includes(
-  role || ""
-);
-
 const UserCart: React.FC<UserCartProps> = ({
   items,
   onClose,
@@ -110,6 +105,16 @@ const UserCart: React.FC<UserCartProps> = ({
   const [existingItemIds, setExistingItemIds] = useState<Set<number>>(
     new Set()
   );
+  const [role, setRole] = useState<string | null>(null);
+  const [isPrivilegedUser, setIsPrivilegedUser] = useState<boolean>(false);
+
+  useEffect(() => {
+    const storedRole = localStorage.getItem("role");
+    setRole(storedRole);
+    setIsPrivilegedUser(
+      ["owner", "staff", "manager", "chief"].includes(storedRole || "")
+    );
+  }, []);
 
   console.log(order);
 
