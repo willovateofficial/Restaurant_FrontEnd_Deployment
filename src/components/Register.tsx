@@ -89,7 +89,7 @@ const Register = () => {
       <div className="flex items-center justify-center min-h-screen relative z-10 px-4">
         <div className="bg-white bg-opacity-95 rounded-2xl shadow-2xl w-full max-w-md p-8">
           <h2 className="text-2xl font-bold text-center text-gray-800 mb-1">
-            Create Account
+            Create Your Account
           </h2>
           <p className="text-sm text-gray-600 text-center mb-6">
             Sign up to get started
