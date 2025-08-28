@@ -14,6 +14,6 @@ export const planAccessMap: Record<string, string[] | { allow: string[], deny?: 
   ],
   "standard": {
     allow: ["*"],
-    deny: ["/admin"] // 🚫 explicitly deny /admin
+    deny: ["/admin"] // explicitly deny /admin
   }
 };
