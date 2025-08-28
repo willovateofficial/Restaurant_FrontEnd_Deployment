@@ -87,7 +87,7 @@ export function getDemoPlans(billing: string): Plan[] {
         "Seamless Multi-Device Sync (Disabled)",
         "In-depth Sales Analytics (Disabled)",
         "Third-Party App Integration  (Disabled)",
-      ],
+      ], 
     },
     {
       id: "standard",
