@@ -57,7 +57,7 @@ export function getDemoPlans(billing: string): Plan[] {
         "Team & Staff Management (Disabled)",
         "Seamless Multi-Device Sync (Disabled)",
         "In-depth Sales Analytics (Disabled)",
-        "Third-Party App Integration  (Disabled)",
+        "Third-Party App Integration (Disabled)",
       ],
     },
     {
@@ -83,10 +83,10 @@ export function getDemoPlans(billing: string): Plan[] {
         "Digital Table Reservation",
         "Secure Admin Access",
         "24/7 Priority Support (Disabled)",
-        "Team & Staff Management  (Disabled)",
+        "Team & Staff Management (Disabled)",
         "Seamless Multi-Device Sync (Disabled)",
         "In-depth Sales Analytics (Disabled)",
-        "Third-Party App Integration  (Disabled)",
+        "Third-Party App Integration (Disabled)",
       ], 
     },
     {
