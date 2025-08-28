@@ -204,7 +204,7 @@ const InventoryPage = () => {
               Inventory Management
             </h1>
             <p className="text-xs sm:text-sm text-gray-600 mt-1">
-              Track and manage your restaurant's ingredients
+              Track and Manage your Restaurant's Ingredients
             </p>
           </div>
           <button
