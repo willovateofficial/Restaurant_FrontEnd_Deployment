@@ -307,7 +307,7 @@ const PlansPage = () => {
                                 />
                               </svg>
                               {feature}
-                            </span>
+                            </span> 
                           )}
                         </li>
                       ))}
