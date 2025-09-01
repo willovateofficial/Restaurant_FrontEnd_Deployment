@@ -1,5 +1,4 @@
 import axios from "axios";
-import { baseUrl } from "../config";
 
 export const axiosInstance = axios.create({
   baseURL: "https://restaurant-backend-deployment.onrender.com",

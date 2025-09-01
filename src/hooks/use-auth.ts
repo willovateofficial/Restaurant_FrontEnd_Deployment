@@ -11,7 +11,7 @@ export function useAuth() {
     logout: () => {
       localStorage.removeItem("token");
       localStorage.removeItem("role");
-      localStorage.removeItem("plan"); // 👈 Clear plan also on logout
+      localStorage.removeItem("plan"); 
       window.location.href = "/login";
     },
   };

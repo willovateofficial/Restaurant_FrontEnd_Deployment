@@ -112,7 +112,7 @@ const UserCart: React.FC<UserCartProps> = ({
     const storedRole = localStorage.getItem("role");
     setRole(storedRole);
     setIsPrivilegedUser(
-      ["owner", "staff", "manager", "chief"].includes(storedRole || "")
+      ["owner", "staff", "manager", "chef"].includes(storedRole || "")
     );
   }, []);
 

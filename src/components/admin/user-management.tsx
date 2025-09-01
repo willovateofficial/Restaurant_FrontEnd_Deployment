@@ -15,7 +15,7 @@ interface User {
 
 const baseURL = baseUrl;
 
-const roles = ["Manager", "Staff", "Chief"];
+const roles = ["Manager", "Staff", "Chef"];
 const PAGE_SIZE = 8;
 
 type FormMode = "add" | "edit";

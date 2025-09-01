@@ -160,7 +160,9 @@ function App() {
           <Route
             path="/inventory"
             element={
-              <ProtectedRoute allowedRoles={["owner", "manager", "admin", "chief"]}>
+              <ProtectedRoute
+                allowedRoles={["owner", "manager", "admin", "chef"]}
+              >
                 <InventoryPage />
               </ProtectedRoute>
             }
@@ -220,7 +222,7 @@ function App() {
             path="/order-list"
             element={
               <ProtectedRoute
-                allowedRoles={["staff", "owner", "manager", "admin", "chief"]}
+                allowedRoles={["staff", "owner", "manager", "admin", "chef"]}
               >
                 <OrderList />
               </ProtectedRoute>
@@ -231,7 +233,7 @@ function App() {
             path="/order-details/:orderId"
             element={
               <ProtectedRoute
-                allowedRoles={["staff", "owner", "manager", "admin", "chief"]}
+                allowedRoles={["staff", "owner", "manager", "admin", "chef"]}
               >
                 <OrderDetails />
               </ProtectedRoute>

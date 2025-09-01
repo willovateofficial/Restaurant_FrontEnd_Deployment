@@ -42,7 +42,7 @@ const InventoryPage = () => {
   const [error, setError] = useState<string | null>(null); // Add error state
 
   const role = localStorage.getItem("role")?.toLowerCase(); // Normalize case
-  const isPrivilegedUser = ["owner", "staff", "manager", "chief"].includes(
+  const isPrivilegedUser = ["owner", "staff", "manager", "chef"].includes(
     role || ""
   );
 

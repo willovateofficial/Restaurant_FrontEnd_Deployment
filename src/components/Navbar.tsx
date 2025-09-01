@@ -102,7 +102,7 @@ const staffNav: NavItem[] = [
   { name: "Take Orders", path: "/restaurant" },
 ];
 
-const chiefNav: NavItem[] = [
+const chefNav: NavItem[] = [
   { name: "Orders", path: "/order-list" },
   { name: "Inventory Management", path: "/inventory" },
 ];
@@ -168,7 +168,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSidebarToggle }) => {
       isAuthenticated &&
       role != null &&
       planStatus === "active" &&
-      ["owner", "manager", "staff", "chief"].includes(role.toLowerCase()) &&
+      ["owner", "manager", "staff", "chef"].includes(role.toLowerCase()) &&
       !isCustomerPage &&
       !excludedPaths.includes(currentPath)
     );
@@ -258,9 +258,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSidebarToggle }) => {
         } else if (normalizedRole === "staff") {
           setNavItems([]);
           setSideStripItems(staffNav);
-        } else if (normalizedRole === "chief") {
+        } else if (normalizedRole === "chef") {
           setNavItems([]);
-          setSideStripItems(chiefNav);
+          setSideStripItems(chefNav);
         }
       } else {
         setNavItems(publicHomeNav);
