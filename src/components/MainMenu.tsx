@@ -51,6 +51,13 @@ const features = [
     desc: "Setup your food items and categories",
   },
   {
+    name: "Table Management",
+    icon: <FaUsers />,
+    path: "/tables",
+    color: "bg-gradient-to-r from-amber-600 to-orange-500",
+    desc: "Manage your restaurant tables",
+  },
+  {
     name: "Customer Database",
     icon: <FaUsers />,
     path: "/customer-list",
