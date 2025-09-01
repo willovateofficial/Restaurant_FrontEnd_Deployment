@@ -65,6 +65,13 @@ const features = [
     desc: "Manage your customer information",
   },
   {
+    name: "User Management",
+    icon: <FaUsers />,
+    path: "/user-management",
+    color: "bg-gradient-to-r from-amber-600 to-orange-500",
+    desc: "Manage your staff information",
+  },
+  {
     name: "Promotions",
     icon: <FaTags />,
     path: "/add-coupon",
